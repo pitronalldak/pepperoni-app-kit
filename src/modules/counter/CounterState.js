@@ -1,6 +1,6 @@
 import {Map} from 'immutable';
 import {loop, Effects} from 'redux-loop';
-import {generateRandomNumber} from '../../services/randomNumberService';
+import {generateRandomNumber} from '../../services/utils';
 
 // Initial state
 const initialState = Map({

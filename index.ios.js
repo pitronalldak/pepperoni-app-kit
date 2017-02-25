@@ -1,5 +1,5 @@
 import {Provider} from 'react-redux';
-import store from './src/redux/store';
+import store from './src/reducers/store';
 import AppViewContainer from './src/modules/AppViewContainer';
 
 import React from 'react';
