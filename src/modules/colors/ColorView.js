@@ -1,11 +1,13 @@
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import NavigationActions from '../../actions/navigation';
+
 import {
   Text,
   View,
   StyleSheet
 } from 'react-native';
-
-import * as NavigationState from '../../modules/navigation/NavigationState';
 
 const color = () => Math.floor(255 * Math.random());
 
@@ -13,25 +15,18 @@ const color = () => Math.floor(255 * Math.random());
  * Sample view to demonstrate navigation patterns.
  * @TODO remove this module in a live application.
  */
-const ColorView = React.createClass({
-  propTypes: {
-    index: PropTypes.number.isRequired,
-    dispatch: PropTypes.func.isRequired
-  },
-
-  getInitialState() {
-    return {
+export class ColorView extends Component {
+  state = {
       background: `rgba(${color()},${color()},${color()}, 1)`
-    };
-  },
+  }
 
-  onNextPress() {
+  onNextPress = () => {
     const index = this.props.index;
-    this.props.dispatch(NavigationState.pushRoute({
+    this.props.pushRoute({
       key: `Color_${index + 1}`,
       title: `Color Screen #${index + 1}`
-    }));
-  },
+    });
+  };
 
   render() {
 
@@ -45,7 +40,12 @@ const ColorView = React.createClass({
       </View>
     );
   }
-});
+}
+
+ColorView.PropTypes = {
+    index: PropTypes.number.isRequired,
+    pushRoute: PropTypes.func.isRequired
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -55,4 +55,5 @@ const styles = StyleSheet.create({
   }
 });
 
-export default ColorView;
+const mapDispatchToProps = (dispatch) => (bindActionCreators(new NavigationActions, dispatch));
+export default connect(undefined, mapDispatchToProps)(ColorView);

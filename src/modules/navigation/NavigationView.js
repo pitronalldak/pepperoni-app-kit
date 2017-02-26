@@ -1,37 +1,29 @@
-import React, {PropTypes} from 'react';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+
+import NavigationActions from '../../actions/navigation';
+
 import {
   NavigationExperimental,
   View,
   StyleSheet
 } from 'react-native';
+
 const {
   CardStack: NavigationCardStack,
   Header: NavigationHeader,
   PropTypes: NavigationPropTypes
 } = NavigationExperimental;
+
 import AppRouter from '../AppRouter';
 import TabBar from '../../components/TabBar';
 
 // Customize bottom tab bar height here if desired
 const TAB_BAR_HEIGHT = 50;
 
-const NavigationView = React.createClass({
-  propTypes: {
-    onNavigateBack: PropTypes.func.isRequired,
-    onNavigateCompleted: PropTypes.func.isRequired,
-    navigationState: PropTypes.shape({
-      tabs: PropTypes.shape({
-        routes: PropTypes.arrayOf(PropTypes.shape({
-          key: PropTypes.string.isRequired,
-          title: PropTypes.string.isRequired
-        })).isRequired
-      }).isRequired,
-      HomeTab: NavigationPropTypes.navigationState.isRequired,
-      ProfileTab: NavigationPropTypes.navigationState.isRequired
-    }),
-    switchTab: PropTypes.func.isRequired,
-    pushRoute: PropTypes.func.isRequired
-  },
+export class NavigationView extends Component {
+
   // NavigationHeader accepts a prop style
   // NavigationHeader.title accepts a prop textStyle
   renderHeader(sceneProps) {
@@ -48,7 +40,8 @@ const NavigationView = React.createClass({
         }}
       />
     );
-  },
+  }
+
   renderScene(sceneProps) {
     // render scene and apply padding to cover
     // for app bar and navigation bar
@@ -57,7 +50,8 @@ const NavigationView = React.createClass({
         {AppRouter(sceneProps)}
       </View>
     );
-  },
+  }
+
   render() {
     const {tabs} = this.props.navigationState;
     const tabKey = tabs.routes[tabs.index].key;
@@ -80,7 +74,24 @@ const NavigationView = React.createClass({
       </View>
     );
   }
-});
+}
+
+NavigationView.PropTypes = {
+    onNavigateBack: PropTypes.func.isRequired,
+    onNavigateCompleted: PropTypes.func.isRequired,
+    navigationState: PropTypes.shape({
+        tabs: PropTypes.shape({
+            routes: PropTypes.arrayOf(PropTypes.shape({
+                key: PropTypes.string.isRequired,
+                title: PropTypes.string.isRequired
+            })).isRequired
+        }).isRequired,
+        HomeTab: NavigationPropTypes.navigationState.isRequired,
+        ProfileTab: NavigationPropTypes.navigationState.isRequired
+    }),
+    switchTab: PropTypes.func.isRequired,
+    pushRoute: PropTypes.func.isRequired
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -92,4 +103,10 @@ const styles = StyleSheet.create({
   }
 });
 
-export default NavigationView;
+
+const mapStateToProps = (state) => ({navigationState: state.navigationState});
+const mapDispatchToProps = (dispatch) => (bindActionCreators(new NavigationActions, dispatch));
+
+export default connect(mapStateToProps,mapDispatchToProps)(NavigationView);
+
+

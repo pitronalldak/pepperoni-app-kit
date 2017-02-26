@@ -1,8 +1,8 @@
 
 export default class TestActions {
-    constructor(services);
+    constructor(services) {}
 
-    getTest = () => {
+    getTest = (path, action) => {
         return (
             this.services.getTest(path, action)
         )

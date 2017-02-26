@@ -2,10 +2,10 @@ import { createStore, applyMiddleware} from 'redux';
 import thunk from 'redux-thunk';
 import promiseMiddleware from 'redux-promise';
 import loggerMiddleware from './middleware/loggerMiddleware';
-import testReducer from './test';
+import rootReducer from './reducer';
 
 const store = createStore(
-    testReducer,
+    rootReducer,
     applyMiddleware(thunk, promiseMiddleware, loggerMiddleware)
 );
 

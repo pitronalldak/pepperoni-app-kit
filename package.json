@@ -30,11 +30,11 @@
     "preset": "react-native"
   },
   "dependencies": {
+    "babel-preset-react-native-stage-0": "^1.0.1",
     "bluebird": "^3.3.5",
     "es6-symbol": "^3.0.2",
     "event-emitter": "^0.3.4",
     "immutable": "^3.7.6",
-    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.11.0",
     "moment": "^2.12.0",
     "react": "~15.4.2",
@@ -55,7 +55,6 @@
     "babel-jest": "^17.0.2",
     "babel-polyfill": "^6.9.0",
     "babel-preset-react-native": "^1.9.0",
-    "babel-preset-stage-0": "^6.5.0",
     "babel-register": "^6.9.0",
     "enzyme": "^2.2.0",
     "eslint": "^3.10.1",

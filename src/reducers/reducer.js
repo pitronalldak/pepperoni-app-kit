@@ -1,18 +1,14 @@
 import {combineReducers} from "redux";
-import NavigationStateReducer from '../modules/navigation/NavigationState';
-import CounterStateReducer from '../modules/counter/CounterState';
-import SessionStateReducer, {RESET_STATE} from '../modules/session/SessionState';
+import navigationReducer from './navigation';
+import sessionReducer, {RESET_STATE} from './session';
 import testReducer from "./test";
 
 const reducers = {
-    // Counter sample app state. This can be removed in a live application
-    counter: CounterStateReducer,
-
     // @NOTE: By convention, the navigation state must live in a subtree called
      //`navigationState`
-    navigationState: NavigationStateReducer,
+    navigationState: navigationReducer,
 
-    session: SessionStateReducer,
+    session: sessionReducer,
 
     test: testReducer
 };

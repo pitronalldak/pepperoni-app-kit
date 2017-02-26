@@ -1,32 +1,27 @@
-import React, {PropTypes} from 'react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {View, StyleSheet, ActivityIndicator} from 'react-native';
-import NavigationViewContainer from './navigation/NavigationViewContainer';
-import * as snapshotUtil from '../utils/snapshot';
-import * as SessionStateActions from '../modules/session/SessionState';
-import store from '../reducers/store';
+import NavigationView from './navigation/NavigationView';
 import DeveloperMenu from '../components/DeveloperMenu';
 
-const AppView = React.createClass({
-  propTypes: {
-    isReady: PropTypes.bool.isRequired,
-    dispatch: PropTypes.func.isRequired
-  },
-  componentDidMount() {
-    snapshotUtil.resetSnapshot()
-      .then(snapshot => {
-        const {dispatch} = this.props;
+export class AppView extends Component {
 
-        if (snapshot) {
-          dispatch(SessionStateActions.resetSessionStateFromSnapshot(snapshot));
-        } else {
-          dispatch(SessionStateActions.initializeSessionState());
-        }
-
-        store.subscribe(() => {
-          snapshotUtil.saveSnapshot(store.getState());
-        });
-      });
-  },
+  // componentDidMount() {
+  //   snapshotUtil.resetSnapshot()
+  //     .then(snapshot => {
+  //       const {dispatch} = this.props;
+  //
+  //       if (snapshot) {
+  //         dispatch(SessionStateActions.resetSessionStateFromSnapshot(snapshot));
+  //       } else {
+  //         dispatch(SessionStateActions.initializeSessionState());
+  //       }
+  //
+  //       store.subscribe(() => {
+  //         snapshotUtil.saveSnapshot(store.getState());
+  //       });
+  //     });
+  // };
 
   render() {
     if (!this.props.isReady) {
@@ -39,12 +34,12 @@ const AppView = React.createClass({
 
     return (
       <View style={{flex: 1}}>
-        <NavigationViewContainer />
+        <NavigationView />
         {__DEV__ && <DeveloperMenu />}
       </View>
     );
   }
-});
+}
 
 const styles = StyleSheet.create({
   centered: {
@@ -53,4 +48,8 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AppView;
+const mapStateToProps = (state) => ({
+    isReady: state.session.isReady
+});
+
+export default connect(mapStateToProps)(AppView);

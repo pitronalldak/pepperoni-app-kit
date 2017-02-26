@@ -1,19 +1,19 @@
 import {Provider} from 'react-redux';
 import store from './src/reducers/store';
-import AppViewContainer from './src/modules/AppViewContainer';
+import AppView from './src/modules/AppView';
 
-import React from 'react';
+import React, {Component} from 'react';
 import {AppRegistry} from 'react-native';
 
-const PepperoniAppTemplate = React.createClass({
+export class AppTemplate extends Component {
 
   render() {
     return (
       <Provider store={store}>
-        <AppViewContainer />
+        <AppView />
       </Provider>
     );
   }
-});
+}
 
-AppRegistry.registerComponent('PepperoniAppTemplate', () => PepperoniAppTemplate);
+AppRegistry.registerComponent('PepperoniAppTemplate', () => AppTemplate);
