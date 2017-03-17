@@ -26,7 +26,7 @@ export class NavigationView extends Component {
 
   // NavigationHeader accepts a prop style
   // NavigationHeader.title accepts a prop textStyle
-  renderHeader(sceneProps) {
+  renderHeader = (sceneProps) => {
     return (
       <NavigationHeader
         {...sceneProps}
@@ -42,7 +42,7 @@ export class NavigationView extends Component {
     );
   }
 
-  renderScene(sceneProps) {
+  renderScene = (sceneProps) => {
     // render scene and apply padding to cover
     // for app bar and navigation bar
     return (
@@ -50,7 +50,7 @@ export class NavigationView extends Component {
         {AppRouter(sceneProps)}
       </View>
     );
-  }
+  };
 
   render() {
     const {tabs} = this.props.navigationState;

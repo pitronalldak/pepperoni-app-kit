@@ -8,6 +8,10 @@ import ColorViewContainer from './colors/ColorView';
 export default function AppRouter(props) {
   const key = props.scene.route.key;
 
+  if (key === 'Counter') {
+      return <CounterViewContainer />;
+  }
+
   if (key.indexOf('Color') === 0) {
     const index = props.scenes.indexOf(props.scene);
     return (
