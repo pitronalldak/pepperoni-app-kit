@@ -13,13 +13,19 @@ const initialState = {
     tabs: {
         index: 0,
         routes: [
-            {key: 'HomeTab', title: 'HOME'}
+            {key: 'HomeTab', title: 'HOME'},
+            {key: 'SignUp', title: 'SIGNUP'},
         ]
     },
-    // Scenes for the `HomeTab` tab.
+
     HomeTab: {
         index: 0,
         routes: [{key: 'Color', title: 'Color Screen'}]
+    },
+
+    SignUp: {
+        index: 0,
+        routes: [{key: 'SignUp', title: 'Sign Up'}]
     }
 };
 

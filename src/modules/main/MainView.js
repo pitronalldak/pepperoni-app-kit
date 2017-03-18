@@ -11,11 +11,7 @@ import {
 
 const color = () => Math.floor(255 * Math.random());
 
-/**
- * Sample view to demonstrate navigation patterns.
- * @TODO remove this module in a live application.
- */
-export class ColorView extends Component {
+class ColorView extends Component {
   state = {
       background: `rgba(${color()},${color()},${color()}, 1)`
   }

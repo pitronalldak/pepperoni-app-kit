@@ -19,9 +19,6 @@ const {
 import AppRouter from '../AppRouter';
 import TabBar from '../../components/TabBar';
 
-// Customize bottom tab bar height here if desired
-const TAB_BAR_HEIGHT = 50;
-
 export class NavigationView extends Component {
 
   // NavigationHeader accepts a prop style
@@ -65,12 +62,7 @@ export class NavigationView extends Component {
           renderHeader={this.renderHeader}
           renderScene={this.renderScene}
         />
-        <TabBar
-          height={TAB_BAR_HEIGHT}
-          tabs={tabs}
-          currentTabIndex={tabs.index}
-          switchTab={this.props.switchTab}
-        />
+
       </View>
     );
   }
